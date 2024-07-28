@@ -14,11 +14,12 @@ templ Page(props *utils.PageProps) {
 				<title>Give a page title</title>
 			}
 			<link href="/static/output.css" rel="stylesheet"/>
+			<link href="/static/pico.min.css" rel="stylesheet"/>
 			<body
 				if props.Class != "" {
 					class={ props.Class }
 				} else {
-					class="bg-slate-950 text-white w-full flex justify-center flex-col"
+					class="text-white flex justify-center flex-col"
 				}
 			>
 				{ children... }

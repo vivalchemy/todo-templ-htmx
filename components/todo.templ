@@ -8,10 +8,10 @@ import (
 templ Todo(props utils.TodoProps) {
 	<div
 		id={ fmt.Sprintf("todo-%d", props.Id) }
-		class="flex p-3 bg-blue-400 text-white"
+		class=""
 	>
 		<p
-			class={ "flex-1 ", templ.KV("line-through", props.IsCompleted) }
+			class={ "", templ.KV("line-through", props.IsCompleted) }
 			name="add-todo"
 			id={ fmt.Sprintf("todo-content-%d", props.Id) }
 		>
