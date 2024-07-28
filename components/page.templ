@@ -1,0 +1,30 @@
+package components
+
+import "github.com/vivalchemy/ecom/utils"
+
+templ Page(props *utils.PageProps) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			if props.Title != "" {
+				<title>{ props.Title }</title>
+			} else {
+				<title>Give a page title</title>
+			}
+			<link href="/static/output.css" rel="stylesheet"/>
+			<body
+				if props.Class != "" {
+					class={ props.Class }
+				} else {
+					class="bg-slate-950 text-white w-full flex justify-center flex-col"
+				}
+			>
+				{ children... }
+				<script src="/static/htmx.min.js">
+      </script>
+			</body>
+		</head>
+	</html>
+}

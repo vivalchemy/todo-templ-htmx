@@ -1,0 +1,23 @@
+package routes
+
+import (
+	"github.com/vivalchemy/ecom/components"
+	"github.com/vivalchemy/ecom/utils"
+)
+
+var HomeArgs = &utils.PageProps{Title: "", Class: ""}
+
+templ Home() {
+	@components.Page(HomeArgs) {
+		<div class="w-1/2 bg-slate-800">
+			<p class="text-3xl m-auto mt-6">
+				Todos
+			</p>
+			<div id="todo-list">This is a todo</div>
+			<div class="flex m-3">
+				<input type="text" name="add-todo" placeholder="Todo 1" class="bg-slate-800 border-slate-500 p-4 rounded-lg border-2 "/>
+				<button class="text-xl bg-blue-400 m-auto" hx-post="/add" hx-include="[name='add-todo']" hx-target="#todo-list" hx-swap="beforeend">Add Todo</button>
+			</div>
+		</div>
+	}
+}

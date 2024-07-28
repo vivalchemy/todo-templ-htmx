@@ -1,0 +1,67 @@
+package components
+
+import (
+	"fmt"
+	"github.com/vivalchemy/ecom/utils"
+)
+
+templ Todo(props utils.TodoProps) {
+	<div
+		id={ fmt.Sprintf("todo-%d", props.Id) }
+		class="flex p-3 bg-blue-400 text-white"
+	>
+		<p
+			class={ "flex-1 ", templ.KV("line-through", props.IsCompleted) }
+			name="add-todo"
+			id={ fmt.Sprintf("todo-content-%d", props.Id) }
+		>
+			{ props.Title }
+		</p>
+		if !props.IsCompleted {
+			<svg
+				hx-swap="outerHTML"
+				hx-target="closest div"
+				hx-post="/completed"
+				hx-vals={ fmt.Sprintf("\"add-todo\":\"%s\"", props.Title) }
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="lucide lucide-check"
+			><path d="M20 6 9 17l-5-5"></path></svg>
+		} else {
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="24"
+				height="24"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				class="lucide lucide-check-check"
+			><path d="M18 6 7 17l-5-5"></path><path d="m22 10-7.5 7.5L13 16"></path></svg>
+		}
+		<svg
+			hx-target="closest div"
+			hx-swap="outerHTML"
+			hx-delete={ fmt.Sprintf("/delete/todo-%d", props.Id) }
+			xmlns="http://www.w3.org/2000/svg"
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="lucide lucide-trash-2"
+		><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
+	</div>
+}

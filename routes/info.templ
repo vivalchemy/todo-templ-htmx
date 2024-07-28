@@ -1,0 +1,13 @@
+package routes
+
+import (
+	"github.com/vivalchemy/ecom/components"
+	"github.com/vivalchemy/ecom/utils"
+)
+
+templ Info() {
+	@components.Page(&utils.PageProps{Title: "Home", Class: "bg-red-400"}) {
+		<h1>This has to be the info page</h1>
+		<a href="/" class="p-3 bg-blue-400 rounded-lg m-4">Go to home bitch</a>
+	}
+}
