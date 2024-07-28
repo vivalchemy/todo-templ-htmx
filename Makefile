@@ -12,7 +12,7 @@ MAIN_FILE := ./main.go
 TAILWIND_FLAGS := --minify
 UTILS_DIR := ./utils
 CSS_INPUT_FILE := ${UTILS_DIR}/input.css
-CSS_OUTPUT_FILE := ${STATIC_DIR}/output.css
+CSS_OUTPUT_FILE := ${STATIC_DIR}/output.min.css
 OUTPUT_FILE := ${BUILD_DIR}/main
 
 .PHONY: live/tailwindcss live/templ live/build live/preview live clean run
@@ -44,4 +44,4 @@ run: ${MAIN_FILE}
 
 clean:
 	@echo -e "${YELLOW}Cleaning...${NC}"
-	@rm -rf ${BUILD_DIR} ${TMP_DIR}
+	@rm -rf ${BUILD_DIR} ${TMP_DIR} ${CSS_OUTPUT_FILE} *_templ.go

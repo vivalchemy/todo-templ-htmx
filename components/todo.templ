@@ -5,13 +5,21 @@ import (
 	"github.com/vivalchemy/ecom/utils"
 )
 
+func TodoBgColor(isCompleted bool) string {
+	if isCompleted {
+		return "bg-slate-900"
+	}
+	return "bg-slate-700"
+
+}
+
 templ Todo(props utils.TodoProps) {
 	<div
 		id={ fmt.Sprintf("todo-%d", props.Id) }
-		class=""
+		class={ fmt.Sprintf("flex gap-2 bg-slate-700 p-2 rounded-md items-center transition-opacity %s", TodoBgColor(props.IsCompleted)) }
 	>
 		<p
-			class={ "", templ.KV("line-through", props.IsCompleted) }
+			class={ "flex-1", templ.KV("line-through", props.IsCompleted) }
 			name="add-todo"
 			id={ fmt.Sprintf("todo-content-%d", props.Id) }
 		>
@@ -32,11 +40,15 @@ templ Todo(props utils.TodoProps) {
 				stroke-width="2"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				class="lucide lucide-check"
+				class="lucide lucide-check text-green-500 cursor-pointer"
 			><path d="M20 6 9 17l-5-5"></path></svg>
 		} else {
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
+				hx-swap="outerHTML"
+				hx-target="closest div"
+				hx-post="/add"
+				hx-vals={ fmt.Sprintf("\"add-todo\":\"%s\"", props.Title) }
 				width="24"
 				height="24"
 				viewBox="0 0 24 24"
@@ -45,7 +57,7 @@ templ Todo(props utils.TodoProps) {
 				stroke-width="2"
 				stroke-linecap="round"
 				stroke-linejoin="round"
-				class="lucide lucide-check-check"
+				class="lucide lucide-check-check text-blue-400 cursor-pointer"
 			><path d="M18 6 7 17l-5-5"></path><path d="m22 10-7.5 7.5L13 16"></path></svg>
 		}
 		<svg
@@ -61,7 +73,7 @@ templ Todo(props utils.TodoProps) {
 			stroke-width="2"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-			class="lucide lucide-trash-2"
+			class="lucide lucide-trash-2 text-red-500 cursor-pointer"
 		><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
 	</div>
 }
